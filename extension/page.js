@@ -132,61 +132,10 @@ screenshotButton.innerHTML = "Screenshot";
 screenshotButton.style.cssFloat = "left";
 screenshotButton.onclick = CaptureScreenshot;
 
-var speed1xButton = document.createElement("button");
-speed1xButton.className = "ytp-button SYText";
-speed1xButton.innerHTML = "1×";
-speed1xButton.onclick = function() {
-	document.getElementsByTagName('video')[0].playbackRate = 1;
-	activePBRButton.classList.remove('SYTactive');
-	this.classList.add('SYTactive');
-	activePBRButton = this;
-};
 
-var speed15xButton = document.createElement("button");
-speed15xButton.className = "ytp-button SYText";
-speed15xButton.innerHTML = "1.5×";
-speed15xButton.onclick = function() {
-	document.getElementsByTagName('video')[0].playbackRate = 1.5;
-	activePBRButton.classList.remove('SYTactive');
-	this.classList.add('SYTactive');
-	activePBRButton = this;
-};
-
-var speed2xButton = document.createElement("button");
-speed2xButton.className = "ytp-button SYText";
-speed2xButton.innerHTML = "2×";
-speed2xButton.onclick = function() {
-	document.getElementsByTagName('video')[0].playbackRate = 2;
-	activePBRButton.classList.remove('SYTactive');
-	this.classList.add('SYTactive');
-	activePBRButton = this;
-};
-
-var speed25xButton = document.createElement("button");
-speed25xButton.className = "ytp-button SYText";
-speed25xButton.innerHTML = "2.5×";
-speed25xButton.onclick = function() {
-	document.getElementsByTagName('video')[0].playbackRate = 2.5;
-	activePBRButton.classList.remove('SYTactive');
-	this.classList.add('SYTactive');
-	activePBRButton = this;
-};
-
-var speed3xButton = document.createElement("button");
-speed3xButton.className = "ytp-button SYText";
-speed3xButton.innerHTML = "3×";
-speed3xButton.onclick = function() {
-	document.getElementsByTagName('video')[0].playbackRate = 3;
-	activePBRButton.classList.remove('SYTactive');
-	this.classList.add('SYTactive');
-	activePBRButton = this;
-};
-
-activePBRButton = speed1xButton;
-
-chrome.storage.sync.get(['screenshotKey', 'playbackSpeedButtons', 'screenshotFunctionality', 'screenshotFileFormat'], function(result) {
+chrome.storage.sync.get(['screenshotKey', , 'screenshotFunctionality', 'screenshotFileFormat'], function(result) {
 	screenshotKey = result.screenshotKey;
-	playbackSpeedButtons = result.playbackSpeedButtons;
+
 	if (result.screenshotFileFormat === undefined) {
 		screenshotFormat = 'png'
 	} else {
@@ -209,31 +158,6 @@ chrome.storage.sync.get(['screenshotKey', 'playbackSpeedButtons', 'screenshotFun
 document.addEventListener('keydown', function(e) {
 	if (document.activeElement.contentEditable === 'true' || document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.contentEditable === 'plaintext')
 		return true;
-
-	if (playbackSpeedButtons) {
-		switch (e.key) {
-			case 'q':
-				speed1xButton.click();
-				e.preventDefault();
-				return false;
-			case 's':
-				speed15xButton.click();
-				e.preventDefault();
-				return false;
-			case 'w':
-				speed2xButton.click();
-				e.preventDefault();
-				return false;
-			case 'e':
-				speed25xButton.click();
-				e.preventDefault();
-				return false;
-			case 'r':
-				speed3xButton.click();
-				e.preventDefault();
-				return false;
-		}
-	}
 
 	if (screenshotKey && e.key === 'p') {
 		CaptureScreenshot();
